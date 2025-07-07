@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>First Date Invitation</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      overflow-x: hidden;
+      font-family: 'Comic Sans MS', cursive, sans-serif;
+      background: linear-gradient(to bottom, #f8e1e7, #fceeea);
+      color: #5c3d43;
+      text-align: center;
+    }
+
+    .container {
+      max-width: 500px;
+      margin: auto;
+      padding: 20px;
+      border-radius: 15px;
+      background-color: rgba(255, 255, 255, 0.6);
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+      position: relative;
+      z-index: 1;
+    }
+
+    h1 {
+      font-size: 22px;
+      margin-bottom: 10px;
+    }
+
+    .doodle {
+      width: 120px;
+      margin: 10px auto;
+    }
+
+    .info {
+      font-size: 18px;
+      margin: 10px 0;
+    }
+
+    .countdown {
+      font-size: 20px;
+      margin-top: 20px;
+      background-color: #ffdce0;
+      padding: 10px;
+      border-radius: 10px;
+      display: inline-block;
+    }
+
+    .footer {
+      margin-top: 30px;
+      font-size: 16px;
+      font-style: italic;
+    }
+
+    /* Animasi bunga jatuh */
+    .falling-flower {
+      position: fixed;
+      top: -50px;
+      z-index: 0;
+      animation: fall linear infinite;
+    }
+
+    @keyframes fall {
+      0% {
+        transform: translateY(0) rotate(0deg);
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(100vh) rotate(360deg);
+        opacity: 0.5;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Animasi bunga jatuh -->
+  <script>
+    const createFlower = () => {
+      const flower = document.createElement('div');
+      flower.classList.add('falling-flower');
+      flower.innerHTML = '🌸';
+      flower.style.left = Math.random() * window.innerWidth + 'px';
+      flower.style.fontSize = (Math.random() * 20 + 10) + 'px';
+      flower.style.animationDuration = (Math.random() * 5 + 5) + 's';
+      document.body.appendChild(flower);
+
+      setTimeout(() => {
+        flower.remove();
+      }, 10000);
+    };
+
+    setInterval(createFlower, 500);
+  </script>
+
+  <div class="container">
+    <img src="dinolucu.jpg" class="doodle" alt="Doodle Dino Cute">
+
+    <h1>For the First time we meet i wanna show you something different bu dino 🫶🏻</h1>
+    <div class="info">
+      <p><strong>dari:</strong> Nazari (dino Besar)</p>
+      <p><strong>Untuk:</strong> Shella (bu dino)</p>
+      <p><strong>Waktu:</strong> 12:30 WITA Siang</p>
+      <p><strong>Lokasi:</strong> Sixsense Coffee</p>
+      <p>Jangan lupa datang ya bu dino cantikk 🩷</p>
+    </div>
+
+    <div class="countdown">
+      <p id="timer"></p>
+    </div>
+
+    <div class="footer">
+      See you besok bu dinoo kuu ✨
+    </div>
+
+    <!-- QR Maps Location -->
+    <div>
+      <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://maps.app.goo.gl/mq3SiW7uzrpp6egr5" alt="QR Location" width="150" style="margin-top:20px;">
+    </div>
+  </div>
+
+  <!-- Backsound autoplay dengan tap -->
+  <audio id="backsound" src="Lagu.mp3" loop></audio>
+
+  <script>
+    // Countdown sampai besok jam 12:30
+    const countdown = () => {
+      const now = new Date().getTime();
+      const tomorrow = new Date();
+      tomorrow.setDate(tomorrow.getDate() + 1);
+      tomorrow.setHours(12, 30, 0, 0);
+
+      const distance = tomorrow - now;
+
+      const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+      const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+      document.getElementById("timer").innerHTML = "Countdown: " + hours + "j " + minutes + "m " + seconds + "d ";
+
+      if (distance < 0) {
+        document.getElementById("timer").innerHTML = "It's Time 💖";
+      }
+    };
+
+    setInterval(countdown, 1000);
+
+    // Play backsound saat user tap halaman
+    document.body.addEventListener('click', function() {
+      const audio = document.getElementById('backsound');
+      audio.play();
+    });
+  </script>
+
+</body>
+</html>
